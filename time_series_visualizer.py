@@ -34,13 +34,11 @@ def draw_line_plot():
 
 def draw_bar_plot():
     # Copy and modify data for monthly bar plot
-    df_bar = df.groupby(
-            (
-                [df.index.year,df.index.month_name()])
-                .agg({'value':'mean'})
-                .reset_index(names = ['Year','Month']
-            )
-        )
+    df_bar = (
+        df.groupby([df.index.year,df.index.month_name()])
+        .agg({'value':'mean'})
+        .reset_index(names = ['Year','Month'])
+    )
 
     months = [month.capitalize() for month in calendar.month_name if month]
     df_bar['Month'] = pd.Categorical(df_bar['Month'],months)
