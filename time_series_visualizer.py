@@ -73,15 +73,16 @@ def draw_box_plot():
     
     fig, axs = plt.subplots(nrows = 1, ncols = 2, figsize = (15,5))
     fliersize = 1
+    bottom, top = 0, 200000
 
     sns.boxplot(data = df_box[['year','value']].set_index('year').T, ax = axs[0], fliersize = fliersize)
-    axs[0].set_ylim(bottom = 0, top = 200000)
+    axs[0].set_yticks(range(bottom, top + 1, 20000))
     axs[0].set_ylabel('Page Views')
     axs[0].set_xlabel('Year')
     axs[0].set_title('Year-wise Box Plot (Trend)')
 
     sns.boxplot(data = df_box[['month','value']].sort_values('month').set_index('month').T, ax = axs[1], fliersize = fliersize)
-    axs[1].set_ylim(bottom = 0, top = 200000)
+    axs[1].set_yticks(range(bottom, top + 1, 20000))
     axs[1].set_title('Month-wise Box Plot (Seasonality)')
     axs[1].set_ylabel('Page Views')
     axs[1].set_xlabel('Month')
